@@ -9,7 +9,7 @@ la nave comandada por Npilot
 Ten cuidado con la lluvia de meteoritos
 
 ***
-***Engine : *** Godot v 3.3.4
+***_Engine : _*** Godot v 3.3.4
 ***Lenguaje: *** GDScript
 ***Plataformna: *** PC
 ***Genero: *** shoot 'em up
