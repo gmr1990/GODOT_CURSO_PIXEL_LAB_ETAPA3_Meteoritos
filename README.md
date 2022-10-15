@@ -10,6 +10,9 @@ Ten cuidado con la lluvia de meteoritos
 
 ***
 ***_Engine : _*** Godot v 3.3.4
-***Lenguaje: *** GDScript
-***Plataformna: *** PC
-***Genero: *** shoot 'em up
+
+***_Lenguaje: _*** GDScript
+
+***_Plataformna: _ *** PC
+
+***_Genero: _*** shoot 'em up
