@@ -13,6 +13,6 @@ Ten cuidado con la lluvia de meteoritos
 
 ***_Lenguaje: _*** GDScript
 
-***_Plataformna: _ *** PC
+***_Plataformna: _*** PC
 
 ***_Genero: _*** shoot 'em up
