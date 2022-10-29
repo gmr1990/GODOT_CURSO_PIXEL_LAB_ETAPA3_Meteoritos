@@ -42,7 +42,7 @@ func almacenar_puntos_disparo() -> void:
 			
 func disparar() -> void:
 	esta_enfriado = false
-	disparo_sfx.play()
+	#disparo_sfx.play()
 	timer_enfriamiento.start()
 	disparo_sfx.play()
 	for punto_disparo in puntos_disparo:
