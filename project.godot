@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://juego/Proyectiles/Canion.gd"
 }, {
+"base": "Line2D",
+"class": "Estela",
+"language": "GDScript",
+"path": "res://juego/Naves/Player/Estela/Trail2D.gd"
+}, {
+"base": "AudioStreamPlayer2D",
+"class": "Motor",
+"language": "GDScript",
+"path": "res://juego/Naves/Player/Motor/MotorSFX.gd"
+}, {
 "base": "RigidBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -31,6 +41,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Canion": "",
+"Estela": "",
+"Motor": "",
 "Player": "",
 "Proyectil": "",
 "RayoLaser": ""
@@ -40,7 +52,7 @@ _global_script_class_icons={
 
 config/name="GODOT_CURSO_PIXEL_LAB_ETAPA3_Meteoritos"
 run/main_scene="res://juego/Niveles/NivelTest.tscn"
-config/icon="res://player_orange.png"
+config/icon="res://Meteoritos_Icono_GMR.png"
 
 [autoload]
 
