@@ -14,6 +14,9 @@ onready var disparo_sfx:AudioStreamPlayer2D = $DisparoSFX
 onready var esta_enfriado:bool = true
 onready var esta_disparando:bool = false setget set_esta_disparando
 
+onready var puede_disparar:bool = false setget set_puede_disparar
+
+
 # GMR :  Agrege estas DECLARACIONES X QUE ME DECIA NO DECLARADAS
 onready var velocidad:Vector2
 onready var danio:int
@@ -25,6 +28,10 @@ var puntos_disparo:Array = []
 func set_esta_disparando(disparando:bool) -> void:
 	esta_disparando = disparando
 	
+func set_puede_disparar(duenio_puede) -> void:
+	puede_disparar = duenio_puede
+	
+		
 #Metodos
 func _ready() -> void:
 	almacenar_puntos_disparo()

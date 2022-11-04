@@ -2,6 +2,11 @@ extends RigidBody2D
 
 class_name Player
 
+# Enums
+enum ESTADO {SPAWN, VIVO, INVENCIBLE, MUERTO}
+
+
+
 ## Atributos Export
 export var potencia_motor:int = 10
 export var potencia_rotacion:int = 2
@@ -9,10 +14,14 @@ export var estela_maxima:int = 150
 
 
 ## Atributos
+var estado_actual:int = ESTADO.SPAWN
+
 var empuje:Vector2 = Vector2.ZERO
 var dir_rotacion:int = 0
 
 # Atributos Onready
+onready var colisionador:CollisionShape2D = $CollisionShape2D
+
 onready var canion:Canion = $Canion
 onready var laser:RayoLaser = $LaserBeam2D
 onready var estela:Estela = $EstelaPuntoInicio/Trail2D
@@ -20,7 +29,15 @@ onready var motor_sfx:Motor = $MotorSFX
 
 
 ## Metodos
+func _ready() -> void:
+	controlador_estados(estado_actual)
+	## TODO: Quitqr, solo DEBUG
+	## controlador_estados(ESTADO.VIVO)
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if not esta_input_activo():
+		return
 	# Veo si se presiona tecla de Disparo Rayo
 	if event.is_action_pressed("disparo_secundario"):
 		laser.set_is_casting(true)
@@ -52,10 +69,39 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 func _process(delta: float) -> void:
 	player_input()
 	
-
-		
+			
 ## Metodos Custom
+
+func controlador_estados(nuevo_estado: int) ->void:
+	match nuevo_estado:
+		ESTADO.SPAWN:
+			colisionador.set_deferred("disable",true)
+			canion.set_puede_disparar(false)
+		ESTADO.VIVO:
+			colisionador.set_deferred("disable",false)
+			canion.set_puede_disparar(true)
+		ESTADO.INVENCIBLE:
+			colisionador.set_deferred("disable",true)
+		ESTADO.MUERTO:
+			colisionador.set_deferred("disable",true)
+			canion.set_puede_disparar(true)
+			queue_free()
+			
+			printerr ("Error de estado")
+		
+	estado_actual = nuevo_estado
+	
+func esta_input_activo() ->bool:
+	if estado_actual in [ESTADO.MUERTO, ESTADO.SPAWN]:
+		return false
+		
+	return true
+		
+			
 func player_input() -> void:
+	if not esta_input_activo():
+		return
+		
 	# Empuje
 	empuje = Vector2.ZERO
 	if Input.is_action_pressed("mover_adelante"):
@@ -76,17 +122,9 @@ func player_input() -> void:
 	if Input.is_action_just_released("disparo_principal"):
 		canion.set_esta_disparando(false)
 		
-	
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+## Se;ales Internas
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name == "spawn":
+		controlador_estados(ESTADO.VIVO)
+		
