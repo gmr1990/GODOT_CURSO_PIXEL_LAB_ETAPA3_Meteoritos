@@ -85,11 +85,17 @@ func controlador_estados(nuevo_estado: int) ->void:
 		ESTADO.MUERTO:
 			colisionador.set_deferred("disable",true)
 			canion.set_puede_disparar(true)
+			Eventos.emit_signal("nave_destruida, global_position")
 			queue_free()
 			
 			printerr ("Error de estado")
 		
 	estado_actual = nuevo_estado
+	
+#Destruir player por enemigo
+func destruir() -> void:
+	controlador_estados(ESTADO.MUERTO)
+	
 	
 func esta_input_activo() ->bool:
 	if estado_actual in [ESTADO.MUERTO, ESTADO.SPAWN]:
